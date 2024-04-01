@@ -21,13 +21,15 @@ Assignment \#2*
       end for#d\
     end for\
   ] 
-  The total number of swaps is $n^2$ in the worst case, which occurs when the disks are in the reverse order and each black disk must be moved n times.
+  The total number of swaps is $n + (n-1) + (n-2) + ... + 1 = (n(n+1))/2$.
 == (b)
-?
+
 
 = 2.
 
 $T(n)=2T(n/2) + n/(lg n)$\
 $ k = lg n$\
-$T(n) = 2^k + n/(lg n) + 2 (n/2)/(lg (n/2)) + 4 (n/4)/(lg (n/4)) + ... + 2^(k) (n / 2^k)/(lg n/2^k)$\
-$T(n) = n + sum^k_(i=0) n/(lg n - i)$
+$T(n) = 2^k + n/(lg n) + 2 (n/2)/(lg (n/2)) + 4 (n/4)/(lg (n/4)) + ... + 2^(k-1) (n / 2^(k-1))/(lg n/2^(k-1))$\
+$T(n) = n + n sum^(k-1)_(i=0) 1/(lg n - i)$\
+
+$T(n) = n + n sum^(k-1)_(i=0) 1/(lg n - i) <= n + n sum^(k-1)_(i=0) 1/(lg n - k + 1) = n + n (lg n -1 ) = O(n lg n)$\
