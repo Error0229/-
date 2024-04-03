@@ -15,11 +15,13 @@
   end for#d\
   end for\
 ] 
-The total number of swaps is $n + (n-1) + (n-2) + ... + 1 = (n(n+1))/2$.== (b)
+The total number of swaps is $n + (n-1) + (n-2) + ... + 1 = (n(n+1))/2$.
 
 == (b)
-TODO
-
+Due to the fact that moving the dark disk at position $1 + 2k$ to $n - k$ requires
+at least $n - k$ swaps\( k from 0 to n - 1\), the total number of swaps is $1 + 2 + 3 + ... + n = (n(n+1))/2$.\
+Hence the lower bound is $Omega(n^2)$. And the lower bound is tight because the
+given algorithm has a complexity of $O(n^2)$.\
 = 2.
 $"let" k = lg n$\
 #align(
