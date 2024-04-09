@@ -95,4 +95,10 @@ Result: a < d < b < c
   return $z_1 dot 2^(n) + z_2 dot 2^(n/2) + z_0$\
 ]
 
-T(n) = 3T(n/2) +
+$T(n) = cases(3T(n/2) + O(n) &"if" n > 1, O(1) &"otherwise")$\
+
+By master theorem, $a = 3, b = 2, f(n) = n$\
++ $n^(log_b a) = n^1.58$\
++ $h(m) = (c m)/m^(1.58) = O(n^(-0.58)), -0.58 < 0$\
++ $T(n) = n^(1.58)[T(1) + O(1)] = O(n^(1.58))$\
+Q.E.D.
