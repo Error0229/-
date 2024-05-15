@@ -36,4 +36,5 @@
   + False, the the new lower bound is $O(n)$
   + False, the lower bound is unknown
 + \
-  + $T(n) = cases(T(n/2) + T(n/4) + T(n/8) + 2n & "if" n > 1, 1 & "if" n = 1)$
+  $T(n) = cases(T(n/2) + T(n/4) + T(n/8) + 2n & "if" n > 1, 1 & "if" n = 1)$
+  +

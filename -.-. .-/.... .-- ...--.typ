@@ -19,8 +19,8 @@ at $A_(j+1)$, which can be represented as $A[i .. j+1]$ where $1 <= i <= j+1$.
 To complete the algorithm, we need to further discuss the case that the new
 element is included in the maximum subarray. In such case, the new maximum
 subarray may be either
-+ the subarry that start from the original subarray 
-+ the subarray that starts after the last element of original maximum subarry 
++ the subarray that start from the original subarray 
++ the subarray that starts after the last element of original maximum subarray 
 and ends at the new element. The new maximum subarray can be represented as $A[i .. j+1]$ where $1 <= i <= j+1$.
 #algo(
   title: "Maximum Subarray",
