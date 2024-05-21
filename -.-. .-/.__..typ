@@ -60,11 +60,12 @@ By induction, we have shown that the given characterization holds for any $B_k$ 
 Thus, the proof is complete.
 
 =
-By using QuickSelect and select the rank $((k-1)n)/(2k)$ number, we can roughly
-divide the input $S$ into two equal parts $S_1, S_2$ with length $n/2$. Then, we
-can recursively apply the algorithm to $S_1$ and $S_2$ to find the remaining $k-2$ elements
-of the output. The running time is defined by the recurrence 
-$ T(n) = cases(2T(n/2) + O(n) "if" n>k, 1 "elsewhere") $, which has a $O(n log k)$ time
+By using QuickSelect and select the rank $floor(k/2) dot n/k$ number, we can
+roughly divide the input $S$ into two equal parts $S_1, S_2$ with length $n/2$.
+Then, we can recursively apply the algorithm to $S_1$ and $S_2$ to find the
+remaining $k-1$ elements of the output. The running time is defined by the
+recurrence 
+$ T(n) = cases(2T(n/2) + O(n) &"if" n>k, 1 &"elsewhere") $, which has a $O(n log k)$ time
 complexity. 
 #algorithm(
   caption: [Find Elements],
@@ -84,13 +85,50 @@ complexity.
     [*return* $"pivot"$],
   ),
 )
-=
-1. Use QuickSelect to find the median of the input array $S$. Then calculate the
-  difference between the median and each element in the array $M$. Finally, find
-  the k-th smallest number index $i$ in the array $M$ by using QuickSelect. And
-  all the elements in the array $S$ that correspond to the first $i$ elements in
-  the array $M$ are the output. The time complexity of this algorithm is $O(n)$.
 
+Example:
+
+Assume we have a sequence $S = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]$ with length $n = 11$ and
+partition count $k = 3$. Our goal is to find the elements in $S$ that have ranks $n/k, (2n)/k, dots, (k-1)n/k$.
+
+1. Initial Call:
+  - $S = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 7]$
+  - $n = 12$
+  - $k = 3$
+
+2. First Partition:
+  - Calculate $(floor(k/2)) dot (n)/(k) = 2 dot 12/3 = 8$
+  - Use QuickSelect to find the element at rank $8$ in $S$.
+  - Let's say QuickSelect returns the 8th smallest element which is $5$.
+  - Now, $S$ is roughly divided into $S_1 = [3, 1, 4, 1, 2, 2]$ and $S_2 = [9, 6, 5, 5, 7]$.
+ 
+3. Recursive Calls on $S_1$:
+  - $S_1 = [3, 1, 4, 1, 2, 2]$
+  - $k = 1$ 
+  - Since $k = 1$, the algorithm terminates and returns the array sorted with its
+    median.
+  - In this example, $S_1$ would be processed to give an array where the median is
+    chosen: let's say it is $3$.
+ 
+4. Recursive Calls on $S_2$:
+  - $S_2 = [9, 6, 5, 5, 7]$
+  - $k = 1$
+  - Similarly, for $S_2$, find the median using QuickSelect or a similar method.
+  - Let's assume it returns $9$.
+ 
+5. Combine Results:
+  - Combine the results from $S_1$ and $S_2$ and include the pivot element $3$.
+  - The resulting array $R$ will be $[3, 5, 9]$, representing the elements at ranks $12/3, 2 dot 12/3,3 dot 12/3$.
+ 
+ 
+= 
+Use QuickSelect to find the median of the input array $S$. Then calculate the
+difference between the median and each element of $S$ and store the difference
+with the number's index in $M$. Finally, find the k-th smallest number index $i$ in
+the array $M$ by using QuickSelect. And all the elements in the array $S$ that
+correspond to the first $i$ elements in the array $M$ are the output. The time
+complexity of this algorithm is $O(n)$.
+ 
 #algorithm(
   caption: [Find Closet],
   pseudocode(
@@ -109,3 +147,20 @@ complexity.
     [*return* $"result"$],
   ),
 )
+ 
+Example: 
+$S = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5], k = 3$
+1. Use QuickSelect to find the median of $S$ :
+- Median is the 6th element in the sorted sequence since $n = 11$ and $floor(11/2)
+  = 5$ .
+- Sorted $S$: $[1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]$
+- Median is 4.
+2. Calculate the absolute differences between each element in $S$ and the median,
+  and store these in $M$: 
+- $M = [1, 3, 0, 3, 1, 5, 2, 2, 1, 1, 1]$
+3. Use QuickSelect to find the $k$ smallest differences:
+- Find the 3rd smallest difference in $M$, which is 1.
+4. Select the corresponding elements in $S$:
+  - Elements in $S$ corresponding to the smallest differences: $[3, 4, 5]$.
+ 
+Output: $[3, 4, 5]$
