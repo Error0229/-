@@ -54,6 +54,16 @@ The time complexity of the above algorithm is $O(n^2)$.
 #pagebreak()
 
 =
+To find the longest palindromic subsequence, we can construct the longest
+palindromic subsequence from 1 to n, and the subsequence can be constructed by
+the following rules:
+- If the first and last characters are the same, then the longest palindromic
+  subsequence is the longest palindromic subsequence of the substring from the
+  second character to the second last character plus 2.
+- If the first and last characters are different, then the longest palindromic
+  subsequence is the maximum of the longest palindromic subsequence of the
+  substring from the first character to the second last character and the
+  substring from the second character to the last character.
 #algorithm(caption: [Longest palindromic subsequence], pseudocode(
   no-number,
   [*Input:* string $s$],
@@ -120,3 +130,24 @@ The time complexity of the above algorithm is $O(n^2)$.
 #pagebreak()
 
 =
+The minimum cost for file placement at server $S_i$ is the minimum cost for file
+place at the all the server $S_j$ before $S_i$ plus the cost of accessing file
+between $i$ to $j$ plus the file placement cost $c_i$. The algorithm is as
+follows:
+#algorithm(
+  caption: [Minimum placement cost],
+  pseudocode(
+    no-number,
+    [*Input:* Size $n$ sequence contains placement cost $c_i$ at server $S_i$, $1 <= i <= n$],
+    no-number,
+    [*Output:* Minimum cost for file copies placement],
+    $"dp is a array with size" n$,
+    $"dp[1]" <- c_i $,
+    [*for* $i = 2$ *to* $n$],
+    ind,
+    $"dp"[i] =c_i + min("dp"[i] + ((j-i)(j-i-1))/2)_(1 <= i < j)$,
+    ded,
+    [*return* $"dp"[n]$],
+  ),
+)
+The time complexity of the above algorithm is $O(n^2)$.
