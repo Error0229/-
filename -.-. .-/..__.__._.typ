@@ -127,7 +127,6 @@ the following rules:
 
 The time complexity of the above algorithm is $O(n^2)$.
 
-#pagebreak()
 
 =
 The minimum cost for file placement at server $S_i$ is the minimum cost for file
